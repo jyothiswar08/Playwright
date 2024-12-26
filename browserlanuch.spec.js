@@ -1,9 +1,10 @@
 const {test, chromium, expect } = require('@playwright/test');
 
-test('has title',async()=>{
-const browser= await chromium.launch();
-const page = await browser.newPage();
-await page.goto('https://amazon.in/');
+test('launching the application URL',async()=>{
+const browser= await chromium.launch({
+    headless: false
+
+});
 
 });
 const context = await browser.newcontext();
@@ -17,4 +18,8 @@ await page.goto ('https://www.facebook.com/login/');
 await page.goforward();
 await expect(page).tohaveURL('https://www.facebook.com/login/');
 await page.waitfortimeout(5000);
+const page2 = await context.newPage();
+await page2.goto('https://www.flipkart.com/');
+await page.waitfortimeout(5000);
+await browser.close();
 
